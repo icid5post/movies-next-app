@@ -74,6 +74,8 @@ module.exports = {
   },
 
   plugins: [
+      require('@tailwindcss/aspect-ratio'),
+      require('@tailwindcss/forms'),
       plugin(({addComponents, theme, addUtilities}) => {
           addComponents({
             '.btn-primary': {
@@ -84,14 +86,31 @@ module.exports = {
               '&:hover': {
                 backgroundColor: '#ff0009'
               }
-            }
-          })
-          addComponents({
+            },
             '.text-shadow': {
               textShadow: '1px 1px rgba(0,0,0,0.4)'
             },
             '.border-r-transparent': {
               borderColor: 'transparent'
+            },
+            '.bg-transparent': {
+              background: 'transparent'
+            },
+            '.air-block': {
+              borderRadius: theme('borderRadius.layout'),
+              backgroundColor: theme('colors.gray.950'),
+              color: theme('colors.white'),
+              boxShadow: theme('boxShadow.lg')
+            },
+            '.text-link': {
+              textUnderlineOffset: 4,
+              color: 'rgba(255n,255,255,0.9)',
+              transition: 'text-decoration-color .3s ease-in-out',
+              textDecorationLine: 'underline',
+              textDecorationColor: 'rgba(255,255,255,0.2)',
+              '&:hover':{
+                textDecorationColor: 'rgba(255,255,255, 0.9)'
+              }
             }
           })
       })

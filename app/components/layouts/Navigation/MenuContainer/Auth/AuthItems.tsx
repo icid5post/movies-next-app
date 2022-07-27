@@ -1,11 +1,51 @@
-import React from 'react';
+import React from 'react'
 
-const AuthItems:React.FC = () => {
-    return (
-        <div>
+import MenuItem from '@/components/layouts/Navigation/MenuContainer/MenuItem'
 
-        </div>
-    );
-};
+import { useAuth } from '@/hooks/useAuth'
+import {getAdminHomeUrl, getAdminUrl} from "../../../../../config/url.config";
 
-export default AuthItems;
+const AuthItems: React.FC = () => {
+	const { user } = useAuth()
+
+	return (
+		<>
+			{user ? (
+				<>
+					<MenuItem
+						item={{
+							icon: 'MdSettings',
+							link: '/profile',
+							title: 'Profile',
+						}}
+					/>
+				</>
+			) : (
+				<>
+					<MenuItem
+						item={{
+							icon: 'MdLogin',
+							link: '/login',
+							title: 'Login',
+						}}
+					/>
+				</>
+			)}
+
+            {
+                user?.isAdmin &&
+                <MenuItem
+                    item={{
+                        icon: 'MdLock',
+                        link: getAdminHomeUrl(),
+                        title: 'Admin panel',
+                    }}
+                />
+            }
+
+
+		</>
+	)
+}
+
+export default AuthItems
